@@ -11,6 +11,8 @@ public class ArrayBagTest {
 		bagA.add("A"); 
 		bagB.add("?");
 		
+		System.out.println("Hello");
+		
 	}
 	
 	
