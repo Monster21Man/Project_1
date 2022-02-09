@@ -9,12 +9,14 @@ public class ArrayBagTest {
 		
 		bagA.add("1"); 
 		bagA.add("A"); 
+		bagA.add("?");
 		bagB.add("?");
+		bagB.add("Hello");
+		bagB.add("!"); 
 		
-		System.out.println("Hello");
-		System.out.println("Hello");
-		System.out.println("Hello");
-		System.out.println("Hello");
+		System.out.println(Arrays.toString(bagA.union(bagB).toArray()));
+		System.out.println(Arrays.toString(bagA.intersection(bagB).toArray()));
+		System.out.println(Arrays.toString(bagA.difference(bagB).toArray()));
 		
 	}
 	
