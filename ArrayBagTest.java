@@ -8,6 +8,7 @@ public class ArrayBagTest {
 		BagInterface <String>  bagB = new ResizableArrayBag.java <>; 
 		
 		bagA.add("1"); 
+		//help
 		
 	}
 	
