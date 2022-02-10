@@ -1,3 +1,3 @@
-public class ResizableArrayBag implements BagInterface<Item> {
+public class ResizableArrayBag implements BagInterface<T> {
   
 }
