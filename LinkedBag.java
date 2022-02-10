@@ -9,6 +9,10 @@ public final class LinkedBag<T> implements BagInterface<T>
     entryNum = 0;
   }
   
+  private class Node
+  {
+  
+  }
   public boolean isEmpty()
   {
     return entryNum == 0;
