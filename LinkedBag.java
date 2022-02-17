@@ -116,6 +116,39 @@ public final class LinkedBag<T> implements BagInterface<T>
    next = nextNode; 
   } // end constructor
  } // end Node
+ 
+ @Override
+ public BagInterface<T> union(BagInterface<T> bag)
+ {
+   
+ }
+ 
+ @Override
+ public BagInterface<T> intersection(BagInterface <T> bag)
+ {
+   BagInterface<T> result = new LinkedBag < >();
+   BagInterface<T> finalResult = new LinkedBag< >();
+   T[] firstBag = this.toArray();
+   for(T elem : firstBag)
+   {
+     result.add(elem);
+   }
+   T[] secondBag = secondBag.toArray();
+   for(T elem : secondBag)
+   {
+     if(result.contains(elem))
+     {
+       finalResult.add(elem);
+     }
+   }
+   reurn finalResult;
+ }
+ 
+ @Override
+ public BagInterface<T> difference(BagInterface<T> bag)
+ {
+   
+ }
 } // end LinkedBag1
 
 
