@@ -117,23 +117,23 @@ public final class LinkedBag<T> implements BagInterface<T>
   } // end constructor
  } // end Node
  
- @Override
+@Override
  public BagInterface<T> union(BagInterface<T> bag)
  {
-   
+	return bag;  
  }
  
- @Override
+@Override
  public BagInterface<T> intersection(BagInterface <T> bag)
  {
-   BagInterface<T> result = new LinkedBag < >();
-   BagInterface<T> finalResult = new LinkedBag< >();
+   BagInterface<T> result = new LinkedBag<>();
+   BagInterface<T> finalResult = new LinkedBag<>();
    T[] firstBag = this.toArray();
    for(T elem : firstBag)
    {
      result.add(elem);
    }
-   T[] secondBag = secondBag.toArray();
+   T[] secondBag = bag.toArray();
    for(T elem : secondBag)
    {
      if(result.contains(elem))
@@ -141,15 +141,11 @@ public final class LinkedBag<T> implements BagInterface<T>
        finalResult.add(elem);
      }
    }
-   reurn finalResult;
+   return finalResult;
  }
- 
  @Override
- public BagInterface<T> difference(BagInterface<T> bag)
+ public BagInterface<T> difference(BagInterface <T> bag)
  {
-   
+	return bag;
  }
 } // end LinkedBag1
-
-
-

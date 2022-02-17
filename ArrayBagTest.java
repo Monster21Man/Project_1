@@ -4,8 +4,8 @@ public class ArrayBagTest
 {
   public static void main(String[] args)
   {
-    BagInterface <String> bag1 = new ResizeableArrayBag< > ();
-    BagInterface <String> bag2 = new ResizeableArrayBag< > ();
+    BagInterface <String> bag1 = new ResizableArrayBag <>();
+    BagInterface <String> bag2 = new ResizableArrayBag <>();
     
     bag1.add("A");
     bag1.add("B");

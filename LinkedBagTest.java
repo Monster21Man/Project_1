@@ -4,8 +4,8 @@ public class LinkedBagTest
 {
   public static void main(String[] args)
   {
-    BagInterface <String> bag1 = new LinkedBag < >();
-    BagInterface <String> bag2 = new LinkedBag < >();
+    BagInterface <String> bag1 = new LinkedBag <>();
+    BagInterface <String> bag2 = new LinkedBag <>();
     bag1.add("A");
     bag1.add("B");
     bag1.add("C");

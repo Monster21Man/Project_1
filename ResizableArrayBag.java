@@ -1,3 +1,4 @@
+import java.util.*;
 /**
    A class that implements a bag of objects by using an array.
  The bag is never full.
@@ -8,7 +9,7 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
 {
  private T[] bag; // Cannot be final due to doubling
  private int numberOfEntries;
-   private boolean integrityOK = false;
+ private boolean integrityOK = false;
  private static final int DEFAULT_CAPACITY = 25; // Initial capacity of bag
  private static final int MAX_CAPACITY = 10000;
 
@@ -173,7 +174,6 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
  } // end getIndexOf
    
    // Removes and returns the entry at a given index within the array.
-import java.util.Arrays;
  // If no such entry exists, returns null.
    // Precondition: 0 <= givenIndex < numberOfEntries.
    // Precondition: checkintegrity has been called.
@@ -222,4 +222,22 @@ import java.util.Arrays;
       if (!integrityOK)
          throw new SecurityException ("ArrayBag object is corrupt.");
    } // end checkintegrity
-} // end ResizableArrayBag
+
+@Override
+public BagInterface<T> difference(BagInterface<T> bag) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public BagInterface<T> intersection(BagInterface<T> bag) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public BagInterface<T> union(BagInterface<T> bag) {
+	// TODO Auto-generated method stub
+	return null;
+}
+} //
