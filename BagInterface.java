@@ -1,10 +1,7 @@
 
 public interface BagInterface <T>{
- public BagInterface <T> union (BagInterface<T> newBag);
- public BagInterface <T> intersection(BagInterface<T> newBag);
- public BagInterface <T> difference(BagInterface<T> newBag);
- public int getCSize();
- public int getFreq(T anEntry);
+ public int getCurrentSize();
+ public int getFrequencyOf(T anEntry);
  public boolean isEmpty();
  public boolean add(T newEntry);
  public T remove();
