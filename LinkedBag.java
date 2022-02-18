@@ -66,22 +66,58 @@ public final class LinkedBag<T> implements BagInterface<T>
        @return  Either the removed entry, if the removal
                 was successful, or null. */
  public T remove()
-   {
-      return null; // STUB
-   } // end remove
-   
+
+ {
+
+ T result = null;
+
+ if (firstNode != null)
+
+ {
+
+ result = firstNode.data;
+
+ firstNode = firstNode.next; // Remove first node from chain
+
+ numberOfEntries--;
+
+ } // end if
+
+ return result;
+
+ } 
  /** Removes one occurrence of a given entry from this bag.
        @param anEntry  The entry to be removed.
        @return  True if the removal was successful, or false otherwise. */
    public boolean remove(T anEntry)
    {
-      return false; // STUB
+	   boolean result = false;
+
+	   Node nodeN = getReferenceTo(anEntry);
+
+	   if (nodeN != null)
+
+	   {
+
+	   nodeN.data = firstNode.data; // Replace located entry with entry in first node
+
+	   firstNode = firstNode.next; // Remove first node
+
+	   numberOfEntries--;
+
+	   result = true;
+
+	   } // end if
+
+	   return result; // STUB
    } // end remove
  
  /** Removes all entries from this bag. */
  public void clear()
    {
-      // STUB
+	 while (!isEmpty())
+
+		 remove();// STUB
    } // end clear
  
  /** Counts the number of times a given entry appears in this bag.
@@ -89,7 +125,19 @@ public final class LinkedBag<T> implements BagInterface<T>
    @return  The number of times anEntry appears in the bag. */
  public int getFrequencyOf(T anEntry)
    {
-      return 0; // STUB
+	  int frequency = 0; 
+	  int counter = 0;
+	  Node currentNode = firstNode;
+	  while ((counter < numberOfEntries) && (currentNode != null))
+	  {
+		  if(anEntry.equals(currentNode.data)) {
+			  frequency++;
+	
+		  }
+		  counter++;
+		  currentNode = currentNode.next;
+	  }
+      return frequency; // STUB
    } // end getFrequencyOf
  
  /** Tests whether this bag contains a given entry.
@@ -97,9 +145,46 @@ public final class LinkedBag<T> implements BagInterface<T>
    @return  True if the bag contains anEntry, or false otherwise. */
  public boolean contains(T anEntry)
    {
-      return false; // STUB
-   } // end contains
+      boolean found = false;
+      Node currentNode = firstNode;
+      while(!found && (currentNode != null)) {
+    	  if (anEntry.equals(currentNode.data))
 
+    		  found = true;
+
+    		  else
+
+    		  currentNode = currentNode.next;
+
+    		  } // end while
+
+    		  return found;// STUB
+   } // end contains
+ private Node getReferenceTo(T anEntry)
+
+ {
+
+ boolean found = false;
+
+ Node currentNode = firstNode;
+
+ while (!found && (currentNode != null))
+
+ {
+
+ if (anEntry.equals(currentNode.data))
+
+ found = true;
+
+ else
+
+ currentNode = currentNode.next;
+
+ } // end while
+
+ return currentNode;
+
+ } 
  private class Node
  {
    private T    data; // Entry in bag
@@ -120,7 +205,7 @@ public final class LinkedBag<T> implements BagInterface<T>
 @Override
  public BagInterface<T> union(BagInterface<T> bag)
  {
-	return bag;  
+	return bag; 
  }
  
 @Override

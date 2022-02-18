@@ -224,20 +224,34 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
    } // end checkintegrity
 
 @Override
-public BagInterface<T> difference(BagInterface<T> bag) {
+public BagInterface<T> union(BagInterface<T> bag) {
 	// TODO Auto-generated method stub
 	return null;
 }
 
 @Override
 public BagInterface<T> intersection(BagInterface<T> bag) {
-	// TODO Auto-generated method stub
-	return null;
+	BagInterface<T>result= new ResizableArrayBag<>();
+	BagInterface<T>finalResult = new ResizableArrayBag<>();
+	T[] mine = this.toArray();
+	for(T elem : mine)
+	{
+		result.add(elem);
+	}
+	T[] other = bag.toArray();
+	for(T elem : other)
+	{
+		if(result.contains(elem))
+		{
+			finalResult.add(elem);
+		}
+	}
+	return finalResult;
 }
 
 @Override
-public BagInterface<T> union(BagInterface<T> bag) {
+public BagInterface<T> difference(BagInterface<T> bag) {
 	// TODO Auto-generated method stub
 	return null;
 }
-} //
+} // end ResizableArrayBag
