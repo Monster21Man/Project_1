@@ -251,7 +251,26 @@ public BagInterface<T> intersection(BagInterface<T> bag) {
 
 @Override
 public BagInterface<T> difference(BagInterface<T> bag) {
-	// TODO Auto-generated method stub
-	return null;
+	BagInterface<T> theBag = new ResizableArrayBag<>();
+		T[] other = this.toArray(); 
+		for (int i = 0; i < numberOfEntries; i++) {
+			T conclusion = other[i]; 
+			while (!theBag.contains(conclusion)) {
+				if(!theBag.contains(conclusion)) {
+				int difference; 
+				difference = getFrequencyOf(conclusion) - bag.getFrequencyOf(conclusion); 
+
+				for (int end = 0; end < difference; end++) {
+					theBag.add(conclusion);
+				}
+			}
+			else {
+				System.out.println("There is an error.");
+			}
+
+	}
 }
+		return theBag;
+	}
+
 } // end ResizableArrayBag
