@@ -7,7 +7,7 @@ public class ArrayBagTest
     BagInterface <String> bag1 = new ResizableArrayBag <>();
     BagInterface <String> bag2 = new ResizableArrayBag <>();
     
-    bag1.add("A");
+    bag1.add("F");
     bag1.add("B");
     bag1.add("C");
     bag1.add("D");

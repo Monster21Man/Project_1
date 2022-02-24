@@ -42,24 +42,116 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
       numberOfEntries = contents.length;
       integrityOK = true;
    } // end constructor
-       
+   
+ /** Gets the current number of entries in this bag.
+ @return  The integer number of entries currently in this bag. */
+ public int getCurrentSize()
+ {
+   return numberOfEntries;
+ } // end getCurrentSize
+
+ /** Counts the number of times a given entry appears in this bag.
+ @param anEntry  The entry to be counted.
+ @return  The number of times anEntry appears in this ba. */
+ public int getFrequencyOf(T anEntry)
+ {
+	checkintegrity();
+ 	int counter = 0;
+
+ 	for (int index = 0; index < numberOfEntries; index++)
+ 	{
+ 		if (anEntry.equals(bag[index]))
+ 		{
+ 			counter++;
+ 		} // end if
+ 	} // end for
+
+ 	return counter;
+ } // end getFrequencyOf
+ 
+ /** Sees whether this bag is empty.
+ @return  True if this bag is empty, or false if not. */
+ public boolean isEmpty()
+ {
+	 return numberOfEntries == 0;
+ } // end isEmpty
+ 
  /** Adds a new entry to this bag.
        @param newEntry  The object to be added as a new entry.
        @return  True. */
  public boolean add(T newEntry)
  {
-  checkintegrity();
+	  checkintegrity();
       if (isArrayFull())
       {
          doubleCapacity();
       } // end if
       
+      
       bag[numberOfEntries] = newEntry;
       numberOfEntries++;
       
       return true;
+      
  } // end add
 
+ /** Removes one unspecified entry from this bag, if possible.
+ @return  Either the removed entry, if the removal
+ was successful, or null. */
+ public T remove()
+ {
+	 checkintegrity();
+	 T result = removeEntry(numberOfEntries - 1);
+	 return result;
+ } // end remove
+
+ /** Removes one occurrence of a given entry from this bag.
+ @param anEntry  The entry to be removed.
+ @return  True if the removal was successful, or false if not. */
+ public boolean remove(T anEntry)
+ {
+	 checkintegrity();
+	 int index = getIndexOf(anEntry);
+	 T result = removeEntry(index);
+	 return anEntry.equals(result);
+ } // end remove
+
+//Removes and returns the entry at a given index within the array.
+ // If no such entry exists, returns null.
+ // Precondition: 0 <= givenIndex < numberOfEntries.
+ // Precondition: checkintegrity has been called.
+private T removeEntry(int givenIndex)
+{
+T result = null;
+    
+if (!isEmpty() && (givenIndex >= 0))
+{
+       result = bag[givenIndex];          // Entry to remove
+       int lastIndex = numberOfEntries - 1;
+       bag[givenIndex] = bag[lastIndex];  // Replace entry to remove with last entry
+       bag[lastIndex] = null;             // Remove reference to last entry
+       numberOfEntries--;
+} // end if
+    
+    return result;
+} // end removeEntry
+ 
+ /** Removes all entries from this bag. */
+ public void clear()
+ {
+      while (!isEmpty())
+         remove();
+ } // end clear
+ 
+ /** Tests whether this bag contains a given entry.
+ @param anEntry  The entry to locate.
+ @return  True if this bag contains anEntry, or false otherwise. */
+ public boolean contains(T anEntry)
+ {
+  checkintegrity();
+      return getIndexOf(anEntry) > -1; // or >= 0
+ } // end contains
+ 
  /** Retrieves all entries that are in this bag.
        @return  A newly allocated array of all the entries in this bag. */
  public T[] toArray() 
@@ -77,80 +169,10 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
       return result;
  } // end toArray
    
- /** Sees whether this bag is empty.
-       @return  True if this bag is empty, or false if not. */
- public boolean isEmpty()
- {
-      return numberOfEntries == 0;
- } // end isEmpty
-   
- /** Gets the current number of entries in this bag.
-       @return  The integer number of entries currently in this bag. */
- public int getCurrentSize()
- {
-      return numberOfEntries;
- } // end getCurrentSize
-   
- /** Counts the number of times a given entry appears in this bag.
-       @param anEntry  The entry to be counted.
-       @return  The number of times anEntry appears in this ba. */
- public int getFrequencyOf(T anEntry)
- {
-  checkintegrity();
-      int counter = 0;
-      
-      for (int index = 0; index < numberOfEntries; index++)
-      {
-         if (anEntry.equals(bag[index]))
-         {
-            counter++;
-         } // end if
-      } // end for
-      
-      return counter;
- } // end getFrequencyOf
-   
- /** Tests whether this bag contains a given entry.
-       @param anEntry  The entry to locate.
-       @return  True if this bag contains anEntry, or false otherwise. */
-   public boolean contains(T anEntry)
- {
-  checkintegrity();
-      return getIndexOf(anEntry) > -1; // or >= 0
- } // end contains
-   
- /** Removes all entries from this bag. */
- public void clear()
- {
-      while (!isEmpty())
-         remove();
- } // end clear
- 
- /** Removes one unspecified entry from this bag, if possible.
-       @return  Either the removed entry, if the removal
-       was successful, or null. */
- public T remove()
- {
-  checkintegrity();
-      T result = removeEntry(numberOfEntries - 1);
-      return result;
- } // end remove
- 
- /** Removes one occurrence of a given entry from this bag.
-       @param anEntry  The entry to be removed.
-       @return  True if the removal was successful, or false if not. */
- public boolean remove(T anEntry)
- {
-  checkintegrity();
-      int index = getIndexOf(anEntry);
-      T result = removeEntry(index);
-      return anEntry.equals(result);
- } // end remove
-   
   // Locates a given entry within the array bag.
- // Returns the index of the entry, if located,
- // or -1 otherwise.
-   // Precondition: checkintegrity has been called.
+  // Returns the index of the entry, if located,
+  // or -1 otherwise.
+  // Precondition: checkintegrity has been called.
  private int getIndexOf(T anEntry)
  {
   int where = -1;
@@ -172,26 +194,6 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
       
   return where;
  } // end getIndexOf
-   
-   // Removes and returns the entry at a given index within the array.
- // If no such entry exists, returns null.
-   // Precondition: 0 <= givenIndex < numberOfEntries.
-   // Precondition: checkintegrity has been called.
- private T removeEntry(int givenIndex)
- {
-  T result = null;
-      
-  if (!isEmpty() && (givenIndex >= 0))
-  {
-         result = bag[givenIndex];          // Entry to remove
-         int lastIndex = numberOfEntries - 1;
-         bag[givenIndex] = bag[lastIndex];  // Replace entry to remove with last entry
-         bag[lastIndex] = null;             // Remove reference to last entry
-         numberOfEntries--;
-  } // end if
-      
-      return result;
- } // end removeEntry
    
    // Returns true if the array bag is full, or false if not.
  private boolean isArrayFull()
@@ -226,32 +228,32 @@ public final class ResizableArrayBag<T> implements BagInterface<T>
 @Override
 public BagInterface<T> union(BagInterface<T> bag) {
 	// TODO Auto-generated method stub
-	return null;
+	return bag;
 }
 
 @Override
 public BagInterface<T> intersection(BagInterface<T> bag) {
-	BagInterface<T>result= new ResizableArrayBag<>();
-	BagInterface<T>finalResult = new ResizableArrayBag<>();
-	T[] mine = this.toArray();
-	for(T elem : mine)
+	BagInterface<T> newBag= new ResizableArrayBag<>();
+	BagInterface<T> finalBag = new ResizableArrayBag<>();
+	T[] tempBag = this.toArray();
+	T[] tempBag2 = bag.toArray();
+	for(T elem : tempBag)
 	{
-		result.add(elem);
+		newBag.add(elem);
 	}
-	T[] other = bag.toArray();
-	for(T elem : other)
+	for(T elem : tempBag2)
 	{
-		if(result.contains(elem))
+		if(newBag.contains(elem))
 		{
-			finalResult.add(elem);
+			finalBag.add(elem);
 		}
 	}
-	return finalResult;
+	return finalBag;
 }
 
 @Override
 public BagInterface<T> difference(BagInterface<T> bag) {
 	// TODO Auto-generated method stub
-	return null;
+	return bag;
 }
 } // end ResizableArrayBag

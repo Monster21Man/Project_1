@@ -6,14 +6,13 @@ public final class ArrayBag<T> implements BagInterface<T>
  private static final int DEFAULT_CAPACITY = 25;
  private static final int MAX_CAPACITY = 10000;
 
- /** Creates an empty bag whose initial capacity is 25. */
+ // Creates an empty bag whose initial capacity is 25. 
  public ArrayBag() 
  {
   this(DEFAULT_CAPACITY);
  } // end default constructor
 
- /** Creates an empty bag having a given capacity.
-     @param desiredCapacity  The integer capacity desired. */
+ 
  public ArrayBag(int desiredCapacity)
  {
       if (desiredCapacity <= MAX_CAPACITY)
@@ -35,10 +34,7 @@ public final class ArrayBag<T> implements BagInterface<T>
                                          "allowed maximum.");
  } // end constructor
    
- /** Adds a new entry to this bag.
-       @param newEntry  The object to be added as a new entry.
-       @return  True if the addition is successful, or false if not. */
- public boolean add(T newEntry)
+  public boolean add(T newEntry)
  {
   checkIntegrity();
       boolean result = true;
@@ -55,9 +51,7 @@ public final class ArrayBag<T> implements BagInterface<T>
       return result;
  } // end add
    
- /** Retrieves all entries that are in this bag.
-       @return  A newly allocated array of all the entries in this bag. */
-   // public <T> T[] toArray() //OK
+ 
  public T[] toArray() //OK
  {
   checkIntegrity();
@@ -223,5 +217,4 @@ public BagInterface<T> difference(BagInterface<T> bag) {
 }
 //
 } // end ArrayBag
-
 
