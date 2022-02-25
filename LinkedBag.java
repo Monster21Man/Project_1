@@ -203,11 +203,34 @@ public final class LinkedBag<T> implements BagInterface<T>
   } // end constructor
  } // end Node
  
-@Override
- public BagInterface<T> union(BagInterface<T> bag)
- {
-	return bag; 
- }
+	public static <T> void copy(T[] original, T[] duplicate) {
+		for(int i = 0; i < original.length; i++) {
+			duplicate[i] = original[i];
+		}	//copying each element of the original onto the 2nd
+	}	//end copy
+	
+	@Override
+	public BagInterface<T> union(BagInterface<T> bag) {
+		BagInterface<T> everything = new LinkedBag<>();
+		T[] bag0 = this.toArray();	//first bag originally calling the method
+		//System.out.println("bag0: " + Arrays.toString(bag0));
+		T[] bag1 = bag0;	//new bag pointing to the 1st bag
+			copy(bag0, bag1);	//copying the old elements
+	
+		T[] bag2 = bag.toArray();	//second bag that is being placed in the parameter
+			//System.out.println("bag2: " + Arrays.toString(bag2));
+		T[] bag3 = bag2;	//new bag to pointing to the 2nd bag
+			copy(bag2, bag3);	//copying the old elements
+		
+		for(T var: bag1) {	//for(T var; var < bag; var++)
+			everything.add(var);
+		}	//adding all of bag 1 into the new bag first
+		for(T var: bag3) {
+			everything.add(var);
+		}	//adding all of bag 2 into the bag afterwards
+
+		return everything;
+	}
  
 @Override
  public BagInterface<T> intersection(BagInterface <T> bag)
