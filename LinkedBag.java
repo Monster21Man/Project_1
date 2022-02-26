@@ -267,9 +267,6 @@ public final class LinkedBag<T> implements BagInterface<T>
         theBag.add(conclusion);
       }
       }
-      else {
-      System.out.println("There is an error.");
-      }
 
   }
   return theBag;
