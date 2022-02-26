@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.HashMap;
+import java.util.Map; 
 /**
    A class that implements a bag of objects by using an array.
  The bag is never full.
@@ -293,12 +295,39 @@ public BagInterface<T> difference(BagInterface<T> bag) {
 					theBag.add(conclusion);
 				}
 				}
-				else {
-				System.out.println("There is an error.");
-				}
 
 		}
 		return theBag;
 	}
 
-} // end ResizableArrayBag
+
+
+ // end ResizableArrayBag
+
+public BagInterface<T> differences(BagInterface<T> bag) {
+   BagInterface <T> theBag = new ResizableArrayBag<>(); 
+   T[] other = this.toArray();
+   T[] otherBag = bag.toArray();
+   Map<T, Integer> mapFrequency = new HashMap<>();
+   for (int i = 0; i < numberOfEntries; i++) {
+      T conclusion = other[i];
+      if(!mapFrequency.containsKey(conclusion)) {
+         mapFrequency.put(conclusion, getFrequencyOf(conclusion)); 
+      }
+   }
+   for (int i = 0; i < otherBag.length; i++) {
+      if(mapFrequency.containsKey(otherBag[i])) {
+         mapFrequency.put(otherBag[i], mapFrequency.get(otherBag[i]) - bag.getFrequencyOf(otherBag[i])); 
+      }
+   }
+   for (T key : mapFrequency.keySet()) {
+      int freq = mapFrequency.get(key); 
+      if (freq > 0) {
+         for(int i = 0; i < freq; i++) {
+            theBag.add(key); 
+         }
+      }
+   }
+    return theBag; 
+}
+}

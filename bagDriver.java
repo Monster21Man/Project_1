@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class bagDriver {
+public class BagDriver {
   public static void main (String[] args) {
     
     BagInterface <String> bag1 = new LinkedBag <>();
@@ -8,24 +8,58 @@ public class bagDriver {
     
     Scanner s = new Scanner(System.in); 
     System.out.println("Welcome to the Wheat Farm.");
-    boolean cont = false;
+    String cont = "";
     System.out.println("What kind of bread do you want in your first shopping cart?");
+    String item = s.nextLine();
+    bag1.add(item);
     while(true){ 
-      String item = s.nextLine();
-      bag1.add(item);
-      
-      System.out.println("Do you have more items? Type Y or N");
-      int input = s.nextInt(); 
-      
-      if(input == 0){
-        System.out.println("Please add the next item.");
-      }
-      else if (input == 1) {
-        System.out.println("Please move on to the second shopping cart.");
-        break; 
-      }
-      else {
-        System.out.println("You have entered an invalid response.");
-      }
+        
+        System.out.println("Do you have more items? Type 0 for Yes and 1 for No.");
+        int input = s.nextInt(); 
+        
+        if(input == 0){
+          System.out.println("Please add the next item.");
+          item = s.nextLine();
+          item = s.nextLine();
+          bag1.add(item);
+        }
+        else if (input == 1) {
+          System.out.println("Please move on to the second shopping cart.");
+          break; 
+        }
+        else {
+          System.out.println("You have entered an invalid response.");
+        }
     }
     
+    
+    System.out.println("What kind of bread do you want in your second shopping cart?");
+    item = s.nextLine();
+    item = s.nextLine();
+    bag2.add(item);
+    while(true){ 
+        
+        System.out.println("Do you have more items? Type 0 for Yes and 1 for No.");
+        int input = s.nextInt(); 
+        
+        if(input == 0){
+          System.out.println("Please add the next item.");
+          item = s.nextLine();
+          item = s.nextLine();
+          bag2.add(item);
+        }
+        else if (input == 1) {
+          System.out.println("Thank you for shopping at the Wheat Farm");
+          break; 
+        }
+        else {
+          System.out.println("You have entered an invalid response.");
+        }
+    }
+
+    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
+    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
+    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
+    
+  }
+}
