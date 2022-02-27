@@ -64,6 +64,7 @@ public class bagDriver {
 		System.out.print("The first cart has ");
 		System.out.print(Arrays.toString(bag1.difference(bag2).toArray()));
 		System.out.println(" in comparison to the second cart.");
+		s.close();
 
 	}
 }
