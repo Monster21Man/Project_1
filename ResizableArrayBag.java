@@ -10,10 +10,10 @@ import java.util.Map;
 public final class ResizableArrayBag<T> implements BagInterface<T>
 {
  private T[] bag; // Cannot be final due to doubling
- private int numberOfEntries;
- private boolean integrityOK = false;
+ private int numberOfEntries; //how big the bag is 
+ private boolean integrityOK = false; //ensure arraybag is not corrupt
  private static final int DEFAULT_CAPACITY = 25; // Initial capacity of bag
- private static final int MAX_CAPACITY = 10000;
+ private static final int MAX_CAPACITY = 10000; //max capacity the bag can have
 
  /** Creates an empty bag whose initial capacity is 25. */
  public ResizableArrayBag() 
@@ -282,17 +282,15 @@ public BagInterface<T> intersection(BagInterface<T> bag) {
 
 @Override
 public BagInterface<T> difference(BagInterface<T> bag) {
-	// TODO Auto-generated method stub
 	BagInterface<T> theBag = new ResizableArrayBag<>();
-		T[] other = this.toArray(); 
-		for (int i = 0; i < numberOfEntries; i++) {
-			T conclusion = other[i]; 
-				if(!theBag.contains(conclusion)) {
-				int difference; 
-				difference = getFrequencyOf(conclusion) - bag.getFrequencyOf(conclusion); 
+		T[] other = this.toArray(); //setting other to the array (initializes bag)
+		for (int i = 0; i < numberOfEntries; i++) { //making sure there is something in the array
+			T conclusion = other[i]; //i is in the index of array; we set it as the variable conclusion
+				if(!theBag.contains(conclusion)) { //if the bag does not contain conclusion
+				int difference = getFrequencyOf(conclusion) - bag.getFrequencyOf(conclusion); //we take the first bag and subtract the second bag
 
 				for (int end = 0; end < difference; end++) {
-					theBag.add(conclusion);
+					theBag.add(conclusion);//if there is a difference from before, we add it to the leftover bag with the add method
 				}
 				}
 
@@ -306,10 +304,10 @@ public BagInterface<T> difference(BagInterface<T> bag) {
 
 public BagInterface<T> differences(BagInterface<T> bag) {
    BagInterface <T> theBag = new ResizableArrayBag<>(); 
-   T[] other = this.toArray();
-   T[] otherBag = bag.toArray();
-   Map<T, Integer> mapFrequency = new HashMap<>();
-   for (int i = 0; i < numberOfEntries; i++) {
+   T[] other = this.toArray(); //the first bag
+   T[] otherBag = bag.toArray(); //the second bag
+   Map<T, Integer> mapFrequency = new HashMap<>(); //using the hashmap method 
+   for (int i = 0; i < numberOfEntries; i++) { 
       T conclusion = other[i];
       if(!mapFrequency.containsKey(conclusion)) {
          mapFrequency.put(conclusion, getFrequencyOf(conclusion)); 

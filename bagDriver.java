@@ -8,7 +8,6 @@ public class BagDriver {
     
     Scanner s = new Scanner(System.in); 
     System.out.println("Welcome to the Wheat Farm.");
-    String cont = "";
     System.out.println("What kind of bread do you want in your first shopping cart?");
     String item = s.nextLine();
     bag1.add(item);
@@ -55,11 +54,16 @@ public class BagDriver {
         else {
           System.out.println("You have entered an invalid response.");
         }
+
     }
 
+    System.out.println("Your shopping cart has the following for the union method: ");
     System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
+    System.out.println("Your shopping cart has the following for the intersection method: ");
     System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
+    System.out.println("Your shopping cart has the following for the difference method: "); 
     System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
     
+    s.close(); 
   }
 }
