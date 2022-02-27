@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class BagDriver {
+public class bagDriver {
 	public static void main(String[] args) {
 
 		BagInterface<String> bag1 = new LinkedBag<>();
@@ -20,7 +20,7 @@ public class BagDriver {
 			if (input == 0) {
 				System.out.println("Please add the next item.");
 				item = s.nextLine();
-				item = s.nextLine();
+				item = s.nextLine(); 
 				bag1.add(item);
 			} else if (input == 1) {
 				System.out.println("Please move on to the second shopping cart.");
