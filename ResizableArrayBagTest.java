@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.*;
 
 public class ResizableArrayBagTest
 {
@@ -7,21 +8,43 @@ public class ResizableArrayBagTest
     //a bag who has a small initial capactiy
     BagInterface <String> bag1 = new ResizableArrayBag <>();
     BagInterface <String> bag2 = new ResizableArrayBag <>();
+
+    testIsMax(bag1, false); 
+    String[] bag1Info = {"A", "B", "C", "A", "A", "A", "B", "A"};
+    testAdd(bag1, bag1Info); 
+
+    testIsMax(bag2, false); 
+    String[] bag2Info = {"A", "A", "C", "D", "A"}; 
+    testAdd(bag2, bag2Info); 
+
+    BagInterface<String> unions = bag1.union(bag2);
+    System.out.println("The union of this bag is: "); 
+    displayBag(unions); 
+
+    BagInterface<String> intersections = bag1.intersection(bag2); 
+    System.out.println("The intersection of this bag is: ");
+    displayBag(intersections); 
+
+    BagInterface<String> differences = bag1.difference(bag2);
+    System.out.println("The difference of bag 1 minus bag 2 is: ");
+    displayBag(differences); 
+
+
+    testRemove(bag1, bag1Info);
     
-    bag1.add("A");
-    bag1.add("B");
-    bag1.add("C");
-    bag1.add("B");
+    BagInterface<String> removed = bag1.union(bag2);
+    System.out.println("Removing the first bag will give us: ");
+    displayBag(removed); 
+
+    // testIsEmpty(bag1)
+
     
-    bag2.add("B");
-    bag2.add("A");
-    bag2.add("B");
-    bag2.add("D");
-    
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
+
   }
+
+
+
+  
   private static void testAdd(BagInterface<String> aBag, String[] content) {
     System.out.print("Adding to the bag: "); 
     for (int index = 0; index < content.length; index++) {
@@ -32,6 +55,8 @@ public class ResizableArrayBagTest
     displayBag(aBag); 
   }//end testAdd method
 
+
+
   private static void displayBag(BagInterface<String> aBag) {
     System.out.println("The bag contains " + aBag.getCurrentSize() + " string(s), as follows: ");
     Object[] bagArray = aBag.toArray(); 
@@ -40,6 +65,7 @@ public class ResizableArrayBagTest
     }//end for 
     System.out.println(); 
   }//end displayBag
+
   private static void testRemove(BagInterface<String> aBag, String[] tests) {
     for (int index = 0; index < tests.length; index++) {
       String aString = tests[index]; 
@@ -85,6 +111,32 @@ public class ResizableArrayBagTest
       System.out.println("not empty: OK."); 
     }//end testIsEmpty
   }
+
+  private static void testIsMax(BagInterface<String> aBag, boolean correctResult) {
+    System.out.print("Testing isMax with ");
+    if(correctResult) {
+      System.out.print("a max bag:");
+    }
+    else {
+      System.out.print("a bag that is not max:"); 
+    }
+    System.out.println("isMax finds the bag ");
+    if (correctResult && aBag.isEmpty()) {
+      System.out.println("max: OK."); 
+    }
+    else if (correctResult) {
+      System.out.println("not max, but it is max: ERROR."); 
+    }
+    else if (!correctResult && aBag.isEmpty()) {
+      System.out.print("max, but it is not max: ERROR."); 
+    }
+    else {
+      System.out.println("not max: OK."); 
+    }//end testIsEmpty
+  }
+
+
+  
 
   //Tests the method getFrequencyOf
   private static void testFrequency(BagInterface<String> aBag, String[] tests) {
