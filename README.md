@@ -6,3 +6,5 @@ Contributions:
      Logan: intersection method
      Janet: union method, Java Unit test frameworks/test cases 
      Kelly: difference method, bagDriver
+YouTube link: https://youtu.be/t_pAGbvkMpk
+Javadoc link: https://github.com/Monster21Man/Project_1/blob/master/doc/index.html
