@@ -9,6 +9,7 @@ import java.util.Map;
  * @author Frank M. Carrano, Timothy M. Henry
  * @version 5.0
  * 
+ * @course CS2400; Project 1
  * @group Wheat Farm
  * @author Logan Bailey
  * @author Janet Cho
@@ -327,6 +328,13 @@ public final class ResizableArrayBag<T> implements BagInterface<T> {
 		return theBag;
 	}
 
+	/**
+	 * Finds the entries that remain after removing those from the bag using a
+	 * hashmap.
+	 * 
+	 * @param bag The bag to be removed.
+	 * @return The new bag that no longer has entries from the parameter.
+	 */
 	public BagInterface<T> differences(BagInterface<T> bag) {
 		BagInterface<T> theBag = new ResizableArrayBag<>();
 		T[] other = this.toArray(); // the first bag

@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-/*
- * A class that tests the methods implemented in the LinkedBag class from the BagInterface interface class.
+/**
+ * A class that tests the methods implemented in the LinkedBag class from the
+ * BagInterface interface class.
  *
  * @group Wheat Farm
  * @author Logan Bailey
@@ -15,9 +16,10 @@ import org.junit.jupiter.api.Test;
 
 class LinkedBagTest {
 
-	/*
-	 * The bag contains 5 items; [1, 2, 4, 5, 7]. Therefore, the current size should
-	 * equal 5.
+	/**
+	 * Return the current size of the bag.
+	 * 
+	 * @return The current size of the bag which is currently 5.
 	 */
 	@Test
 	void testGetCurrentSize() {
@@ -34,9 +36,10 @@ class LinkedBagTest {
 		assertEquals(5, num);
 	}
 
-	/*
-	 * The bag contains 6 items; [1, 2, 4, 1, 5, 7]. Therefore, the current
-	 * frequency of 1 should be 2.
+	/**
+	 * Return the number of times a certain entry has appeared.
+	 * 
+	 * @return The number of times an entry (1) has appeared; in this case, 2 times.
 	 */
 	@Test
 	void testGetFrequencyOf() {
@@ -52,9 +55,10 @@ class LinkedBagTest {
 		assertEquals(2, num);
 	}
 
-	/*
-	 * The bag consists of [1, 2, 5]. After removing 2, the bag now only consists of
-	 * [1, 5].
+	/**
+	 * Removes the last entry of the bag.
+	 * 
+	 * @return The last entry will be removed without any errors.
 	 */
 	@Test
 	void testRemove() {
@@ -64,15 +68,16 @@ class LinkedBagTest {
 		bag.add(2);
 		bag.add(5);
 
-		bag.remove(5);
+		bag.remove();
 
 		assertTrue(bag.contains(2));
 		assertFalse(bag.contains(5));
 	}
 
-	/*
-	 * The bag consists of [1, 3, 5, 5]. After removing 5, the bag consists of [1,
-	 * 3, 5]. After removing 5 again, the bag consists of [1, 3].
+	/**
+	 * Removes a certain entry from the bag.
+	 * 
+	 * @return The specified entry will be removed without any errors.
 	 */
 	@Test
 	void testRemoveEntry() {
@@ -91,9 +96,10 @@ class LinkedBagTest {
 		assertTrue(bag.contains(1));
 	}
 
-	/*
-	 * The bag consists of [1, 5, 7]. However, after clearing the bag, the bag
-	 * consists of 0 entries.
+	/**
+	 * Clears the bag of all entries.
+	 * 
+	 * @return Bag will be cleared of all entries without any errors.
 	 */
 	@Test
 	void testClear() {
@@ -110,9 +116,10 @@ class LinkedBagTest {
 		assertEquals(0, num);
 	}
 
-	/*
-	 * Union is a collection of both bags. bag1: ["1", "2", "3"]. bag2:
-	 * ["4","hello"]. The union is ["1", "2", "3", "4", "hello"].
+	/**
+	 * Combines both bags into one bag.
+	 * 
+	 * @return The combined bag of the previous two bags.
 	 */
 	@Test
 	void testUnion() {
@@ -137,9 +144,10 @@ class LinkedBagTest {
 
 	}
 
-	/*
-	 * Intersection is a collection of items found in both bags. bag1: [1, 2, 3]
-	 * bag2: [3, 4] The intersection is [3].
+	/**
+	 * Finds the entries found in both bags.
+	 * 
+	 * @return The entries located in both bags.
 	 */
 	@Test
 	void testIntersection() {
@@ -163,9 +171,10 @@ class LinkedBagTest {
 		assertFalse(intersect.contains(2));
 	}
 
-	/*
-	 * Difference is a collection of items that differ between bag 1 and bag 2.
-	 * bag1: [3, 6, 9] bag2: [6, 12, 18, 24] Difference: [3, 9]
+	/**
+	 * Finds the entries located in bag1 that are not found in bag2.
+	 * 
+	 * @return The entries found in only bag1.
 	 */
 	@Test
 	void testDifference() {

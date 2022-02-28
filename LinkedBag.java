@@ -1,7 +1,8 @@
-/*
- * A class that implements a bag of objects by using a linked bag. The bag is never
- * full.
+/**
+ * A class that implements a bag of objects by using a linked bag. The bag is
+ * never full.
  * 
+ * @course CS2400; Project 1
  * @group Wheat Farm
  * @author Logan Bailey
  * @author Janet Cho
