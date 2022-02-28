@@ -1,165 +1,56 @@
-import java.util.Arrays;
-
+/**
+ * A test of the constructors and the methods add and toArray, as defined in the
+ * first draft of the class ArrayBag.
+ * 
+ * @author Frank M. Carrano, Timothy M. Henry
+ * @version 5.0
+ */
 public class ResizableArrayBagTest {
 	public static void main(String[] args) {
-		BagInterface<String> bag1 = new ResizableArrayBag<>();
-		BagInterface<String> bag2 = new ResizableArrayBag<>();
-		// Add 4 entries to bag 1
-		bag1.add("F");
-		bag1.add("B");
-		bag1.add("E");
-		bag1.add("D");
+		// Adding to an initially empty bag with sufficient capacity
+		System.out.println("Testing an initially empty bag with " + " sufficient capacity:");
+		BagInterface<String> aBag = new ResizableArrayBag<>();
+		String[] contentsOfBag1 = { "A", "A", "B", "A", "C", "A" };
+		testAdd(aBag, contentsOfBag1);
 
-		// Add 4 entries to bag 2
-		bag2.add("D");
-		bag2.add("C");
-		bag2.add("B");
-		bag2.add("A");
+		// Filling an initially empty bag to capacity
+		System.out.println("\nTesting an initially empty bag that " + " will be filled to capacity:");
+		aBag = new ResizableArrayBag<>(7);
+		String[] contentsOfBag2 = { "A", "B", "A", "C", "B", "C", "D", "another string" };
+		testAdd(aBag, contentsOfBag2);
+	} // end main
 
-		// Test three methods on the two bags
-		System.out.print("Bag1: ");
-		System.out.println(Arrays.toString(bag1.toArray()));
-		System.out.print("Bag2: ");
-		System.out.println(Arrays.toString(bag2.toArray()));
-
-		System.out.print("Union: ");
-		System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
-		System.out.print("Intersection: ");
-		System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
-		System.out.print("Difference: ");
-		System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-
-		// Make a space between two results
+	// Tests the method add.
+	private static void testAdd(BagInterface<String> aBag, String[] content) {
+		System.out.print("Adding the following strings to the bag: ");
+		for (int index = 0; index < content.length; index++) {
+			if (aBag.add(content[index]))
+				System.out.print(content[index] + " ");
+			else
+				System.out.print("\nUnable to add " + content[index] + " to the bag.");
+		} // end for
 		System.out.println();
 
-		// Clear both bags of all entries
-		bag1.clear();
-		bag2.clear();
+		displayBag(aBag);
+	} // end testAdd
 
-		// Test Case: Bags of unequal size
-		bag1.add("A");
-		bag1.add("C");
+	// Tests the method toArray while displaying the bag.
+	private static void displayBag(BagInterface<String> aBag) {
+		System.out.println("The bag contains the following string(s):");
+		Object[] bagArray = aBag.toArray();
+		for (int index = 0; index < bagArray.length; index++) {
+			System.out.print(bagArray[index] + " ");
+		} // end for
 
-		bag2.add("C");
-		bag2.add("D");
-		bag2.add("E");
-
-		// Test our three methods on the two bags
-		System.out.print("Bag1: ");
-		System.out.println(Arrays.toString(bag1.toArray()));
-		System.out.print("Bag2: ");
-		System.out.println(Arrays.toString(bag2.toArray()));
-
-		System.out.print("Union: ");
-		System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
-		System.out.print("Intersection: ");
-		System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
-		System.out.print("Difference: ");
-		System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-
-		// Clear both bags of all entries
-		bag1.clear();
-		bag2.clear();
-
-		// Make a space between two results
 		System.out.println();
-
-		// Test Case: One bag is empty
-		bag1.add("");
-		bag1.add("");
-		bag1.add("");
-
-		bag2.add("C");
-		bag2.add("D");
-		bag2.add("E");
-
-		// Test our three methods on the two bags
-		System.out.print("Bag1: ");
-		System.out.println(Arrays.toString(bag1.toArray()));
-		System.out.print("Bag2: ");
-		System.out.println(Arrays.toString(bag2.toArray()));
-
-		System.out.print("Union: ");
-		System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
-		System.out.print("Intersection: ");
-		System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
-		System.out.print("Difference: ");
-		System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-
-		// Clear both bags of all entries
-		bag1.clear();
-		bag2.clear();
-
-		// Make a space between two results
-		System.out.println();
-
-		// Test Case: Both bags are empty
-		bag1.add("");
-		bag1.add("");
-		bag1.add("");
-
-		bag2.add("");
-		bag2.add("");
-		bag2.add("");
-
-		// Test our three methods on the two bags
-		System.out.print("Bag1: ");
-		System.out.println(Arrays.toString(bag1.toArray()));
-		System.out.print("Bag2: ");
-		System.out.println(Arrays.toString(bag2.toArray()));
-
-		System.out.print("Union: ");
-		System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
-		System.out.print("Intersection: ");
-		System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
-		System.out.print("Difference: ");
-		System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-
-		// Clear both bags of all entries
-		bag1.clear();
-		bag2.clear();
-
-		// Make a space between two results
-		System.out.println();
-
-		// Test Case: Both bags are empty
-		bag1.add("");
-		bag1.add("");
-		bag1.add("");
-
-		bag2.add(null);
-		bag2.add(null);
-		bag2.add(null);
-
-		// Test our three methods on the two bags
-		System.out.print("Bag1: ");
-		System.out.println(Arrays.toString(bag1.toArray()));
-		System.out.print("Bag2: ");
-		System.out.println(Arrays.toString(bag2.toArray()));
-
-		System.out.print("Union: ");
-		System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-
-		System.out.println("woohooooooooooooooo");
-		System.out.print("Intersection: ");
-		System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-
-		System.out.print("Difference: ");
-		System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-
-		// Clear both bags of all entries
-		bag1.clear();
-		bag2.clear();
-
-		// Make a space between two results
-		System.out.println();
-	}
-}
+	} // end displayBag
+} // end ArrayBagDemo1
+/*
+ * Testing an initially empty bag with sufficient capacity: Adding the following
+ * strings to the bag: A A B A C A The bag contains the following string(s): A A
+ * B A C A
+ * 
+ * Testing an initially empty bag that will be filled to capacity: Adding the
+ * following strings to the bag: A B A C B C D Unable to add another string to
+ * the bag. The bag contains the following string(s): A B A C B C D
+ */

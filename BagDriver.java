@@ -1,0 +1,72 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class BagDriver {
+	public static void main(String[] args) {
+
+		BagInterface<String> bag1 = new LinkedBag<>();
+		BagInterface<String> bag2 = new LinkedBag<>();
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Welcome to the Wheat Farm.");
+		System.out.println("What kind of bread do you want in your first shopping cart?");
+		String item = s.nextLine();
+		bag1.add(item);
+		while (true) {
+
+			System.out.println("Do you have more items? Type 0 for Yes and 1 for No.");
+			int input = s.nextInt();
+
+			if (input == 0) {
+				System.out.println("Please add the next item.");
+				item = s.nextLine();
+				item = s.nextLine();
+				bag1.add(item);
+			} else if (input == 1) {
+				System.out.println("Please move on to the second shopping cart.");
+				break;
+			} else {
+				System.out.println("You have entered an invalid response.");
+			}
+		}
+
+		System.out.println("What kind of bread do you want in your second shopping cart?");
+		item = s.nextLine();
+		item = s.nextLine();
+		bag2.add(item);
+		while (true) {
+
+			System.out.println("Do you have more items? Type 0 for Yes and 1 for No.");
+			int input = s.nextInt();
+
+			if (input == 0) {
+				System.out.println("Please add the next item.");
+				item = s.nextLine();
+				item = s.nextLine();
+				bag2.add(item);
+			} else if (input == 1) {
+				System.out.println();
+				break;
+			} else {
+				System.out.println("You have entered an invalid response.");
+			}
+		}
+
+		System.out.println();
+		System.out.println("--Checkout--");
+		System.out.print("Both carts have ");
+		System.out.print(Arrays.toString(bag1.union(bag2).toArray()));
+		System.out.println(" in total (union).");
+
+		System.out.print("Both carts have ");
+		System.out.print(Arrays.toString(bag1.intersection(bag2).toArray()));
+		System.out.println(" (intersection).");
+
+		System.out.print("The first cart has ");
+		System.out.print(Arrays.toString(bag1.difference(bag2).toArray()));
+		System.out.println(" in comparison to the second cart (difference).");
+
+		System.out.println("Thank you for shopping at the Wheat Farm.");
+
+	}
+}
