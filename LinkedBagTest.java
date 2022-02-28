@@ -1,177 +1,193 @@
-import java.util.Arrays;
-public class LinkedBagTest
-{
-  public static void main(String[] args)
-  {
-	//Create two LinkedBag arrays with elements of type String
-    BagInterface <String> bag1 = new LinkedBag <>();
-    BagInterface <String> bag2 = new LinkedBag <>();
-    BagInterface <String> bag3 = null; 
-    int numberofEntries; 
-    //Add 4 entries to bag 1
-    bag1.add("F");
-    bag1.add("B");
-    bag1.add("E");
-    bag1.add("D");
-    
-    //Add 4 entries to bag 2
-    bag2.add("D");
-    bag2.add("C");
-    bag2.add("B");
-    bag2.add("A");
-    
-    //Test three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-    
-    //Make a space between two results
-    System.out.println();
-    
-    //Clear both bags of all entries
-    bag1.clear();
-    bag2.clear();
-    
-    //Test Case: Bags of unequal size
-    bag1.add("A");
-    bag1.add("C");
-    
-    bag2.add("C");
-    bag2.add("D");
-    bag2.add("E");
-    
-    
-    
-    //Test our three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-    
-    //Clear both bags of all entries
-    bag1.clear();
-    bag2.clear();
-    
-    //Make a space between two results
-    System.out.println();
-    
-    //Test Case: One bag is empty
-    bag1.add("");
-    bag1.add("");
-    bag1.add("");
-    
-    bag2.add("C");
-    bag2.add("D");
-    bag2.add("E");
-    
-    //Test our three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-    
-    //Clear both bags of all entries
-    bag1.clear();
-    bag2.clear();
-    
-   // Make a space between two results
-    System.out.println();
-    
-    //Test Case: Both bags are empty
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    bag1.add("");
-    bag1.add("");
-    bag1.add("");
-    
-    bag2.add("");
-    bag2.add("");
-    bag2.add("");
-    
-    //Test our three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
-    
-    //Clear both bags of all entries
-    bag1.clear();
-    bag2.clear();
-    
-    //Make a space between two results
-    System.out.println();
-    
-  //Test Case: Both bags are empty
-    bag1.add("");
-    bag1.add("");
-    bag1.add("");
-    
-    bag2.add("");
-    bag2.add("");
-    bag2.add("");
-    
-    //Test our three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag3).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag3).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag3).toArray()));
-    
-    //Clear both bags of all entries
-    bag1.clear();
-    bag2.clear();
-    
-    //Make a space between two results
-    System.out.println();
-  
-  }
+import org.junit.jupiter.api.Test;
 
+/*
+ * A class that tests the methods implemented in the LinkedBag class from the BagInterface interface class.
+ *
+ * @group Wheat Farm
+ * @author Logan Bailey
+ * @author Janet Cho
+ * @author Kelly Tsai
+ */
 
-  
+class LinkedBagTest {
 
-  private static void testIsEmpty(BagInterface<String> bag, boolean empty)
-   {
-      System.out.print("\nTesting isEmpty with ");
-      if (empty)
-         System.out.println("an empty bag:");
-      else
-         System.out.println("a bag that is not empty:");
-      
-      System.out.print("isEmpty finds the bag ");
-      if (empty && bag.isEmpty())
-			System.out.println("empty: OK.");
-		else if (empty)
-			System.out.println("not empty, but it is: ERROR.");
-		else if (!empty && bag.isEmpty())
-			System.out.println("empty, but it is not empty: ERROR.");
-		else
-			System.out.println("not empty: OK.");      
-	} // end testIsEmpty
-   
-   // Tests the method add.
-   private static void testAdd(BagInterface<String> aBag, String[] content)
-   {
-      System.out.print("Adding the following strings to the bag: ");
-      for (int index = 0; index < content.length; index++)
-      {
-         if (aBag.add(content[index]))
-            System.out.print(content[index] + " ");
-         else
-            System.out.print("\nUnable to add " + content[index] +
-                             " to the bag.");
-      } // end for
-      System.out.println();
-      
-      displayBag(aBag);
-   } // end testAdd
-   
-   // Tests the method toArray while displaying the bag.
-   private static void displayBag(BagInterface<String> aBag)
-   {
-      System.out.println("The bag contains the following string(s):");
-      Object[] bagArray = aBag.toArray();
-      for (int index = 0; index < bagArray.length; index++)
-      {
-         System.out.print(bagArray[index] + " ");
-      } // end for
-      
-      System.out.println();
-   } // end displayBag
+	/*
+	 * The bag contains 5 items; [1, 2, 4, 5, 7]. Therefore, the current size should
+	 * equal 5.
+	 */
+	@Test
+	void testGetCurrentSize() {
+		// Arrange
+		BagInterface<Integer> bag = new LinkedBag<>();
 
+		bag.add(1);
+		bag.add(2);
+		bag.add(4);
+		bag.add(5);
+		bag.add(7);
 
+		int num = bag.getCurrentSize();
+		assertEquals(5, num);
+	}
 
+	/*
+	 * The bag contains 6 items; [1, 2, 4, 1, 5, 7]. Therefore, the current
+	 * frequency of 1 should be 2.
+	 */
+	@Test
+	void testGetFrequencyOf() {
+		BagInterface<Integer> bag = new LinkedBag<>();
+		bag.add(1);
+		bag.add(2);
+		bag.add(4);
+		bag.add(1);
+		bag.add(5);
+		bag.add(7);
+
+		int num = bag.getFrequencyOf(1);
+		assertEquals(2, num);
+	}
+
+	/*
+	 * The bag consists of [1, 2, 5]. After removing 2, the bag now only consists of
+	 * [1, 5].
+	 */
+	@Test
+	void testRemove() {
+		BagInterface<Integer> bag = new LinkedBag<>();
+
+		bag.add(1);
+		bag.add(2);
+		bag.add(5);
+
+		bag.remove(5);
+
+		assertTrue(bag.contains(2));
+		assertFalse(bag.contains(5));
+	}
+
+	/*
+	 * The bag consists of [1, 3, 5, 5]. After removing 5, the bag consists of [1,
+	 * 3, 5]. After removing 5 again, the bag consists of [1, 3].
+	 */
+	@Test
+	void testRemoveEntry() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
+
+		bag.add(1);
+		bag.add(3);
+		bag.add(5);
+		bag.add(5);
+
+		bag.remove(5);
+		assertTrue(bag.contains(5));
+
+		bag.remove(5);
+		assertFalse(bag.contains(5));
+		assertTrue(bag.contains(1));
+	}
+
+	/*
+	 * The bag consists of [1, 5, 7]. However, after clearing the bag, the bag
+	 * consists of 0 entries.
+	 */
+	@Test
+	void testClear() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
+
+		bag.add(1);
+		bag.add(5);
+		bag.add(7);
+
+		bag.clear();
+
+		assertFalse(bag.contains(1));
+		int num = bag.getCurrentSize();
+		assertEquals(0, num);
+	}
+
+	/*
+	 * Union is a collection of both bags. bag1: ["1", "2", "3"]. bag2:
+	 * ["4","hello"]. The union is ["1", "2", "3", "4", "hello"].
+	 */
+	@Test
+	void testUnion() {
+		// Arrange
+		BagInterface<String> bag1 = new LinkedBag<>();
+		BagInterface<String> bag2 = new LinkedBag<>();
+
+		bag1.add("1");
+		bag1.add("2");
+		bag1.add("3");
+
+		bag2.add("4");
+		bag2.add("hello");
+
+		// Act
+		BagInterface<String> addition = bag1.union(bag2);
+
+		// Assert
+		assertTrue(addition.contains("2"));
+		assertFalse(addition.contains("bye"));
+		assertTrue(addition.contains("3"));
+
+	}
+
+	/*
+	 * Intersection is a collection of items found in both bags. bag1: [1, 2, 3]
+	 * bag2: [3, 4] The intersection is [3].
+	 */
+	@Test
+	void testIntersection() {
+		// Arrange
+		BagInterface<Integer> bag1 = new LinkedBag<>();
+		BagInterface<Integer> bag2 = new LinkedBag<>();
+
+		bag1.add(1);
+		bag1.add(2);
+		bag1.add(3);
+
+		bag2.add(3);
+		bag2.add(4);
+
+		// Act
+		BagInterface<Integer> intersect = bag1.intersection(bag2);
+
+		// Assert
+		assertTrue(intersect.contains(3));
+		assertFalse(intersect.contains(6));
+		assertFalse(intersect.contains(2));
+	}
+
+	/*
+	 * Difference is a collection of items that differ between bag 1 and bag 2.
+	 * bag1: [3, 6, 9] bag2: [6, 12, 18, 24] Difference: [3, 9]
+	 */
+	@Test
+	void testDifference() {
+		// Arrange
+		BagInterface<Integer> bag1 = new LinkedBag<>();
+		BagInterface<Integer> bag2 = new LinkedBag<>();
+
+		bag1.add(3);
+		bag1.add(6);
+		bag1.add(9);
+
+		bag2.add(6);
+		bag2.add(12);
+		bag2.add(18);
+		bag2.add(24);
+
+		// Act
+		BagInterface<Integer> differ = bag1.difference(bag2);
+
+		// Assert
+		assertTrue(differ.contains(3));
+		assertTrue(differ.contains(9));
+		assertFalse(differ.contains(18));
+	}
 }

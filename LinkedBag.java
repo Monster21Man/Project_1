@@ -1,3 +1,13 @@
+/*
+ * A class that implements a bag of objects by using a linked bag. The bag is never
+ * full.
+ * 
+ * @group Wheat Farm
+ * @author Logan Bailey
+ * @author Janet Cho
+ * @author Kelly Tsai
+ */
+
 public final class LinkedBag<T> implements BagInterface<T> {
 	private Node firstNode; // Reference to first node
 	private int numberOfEntries;
@@ -184,6 +194,7 @@ public final class LinkedBag<T> implements BagInterface<T> {
 
 	@Override
 	public BagInterface<T> union(BagInterface<T> bag) {
+
 		BagInterface<T> everything = new LinkedBag<>();
 		T[] bag0 = this.toArray(); // first bag originally calling the method
 		// System.out.println("bag0: " + Arrays.toString(bag0));
@@ -235,13 +246,12 @@ public final class LinkedBag<T> implements BagInterface<T> {
 				for (int end = 0; end < difference; end++) {
 					theBag.add(conclusion);
 				}
-			} 
+			} else {
+				System.out.println("There is an error.");
+			}
 
 		}
 		return theBag;
-
 	}
-	
-
 
 } // end LinkedBag1

@@ -1,150 +1,194 @@
-import java.util.Arrays;
-import java.util.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ResizableArrayBagTest
-{
-  public static void main(String[] args)
-  { 
-    //a bag who has a small initial capactiy
-    BagInterface <String> bag1 = new ResizableArrayBag <>();
-    BagInterface <String> bag2 = new ResizableArrayBag <>();
-    
+import org.junit.jupiter.api.Test;
 
-    testIsMax(bag1, false); 
-    String[] bag1Info = {"A", "B", "C", "A", "A", "A", "B", "A"};
-    testAdd(bag1, bag1Info); 
+/*
+ * A class that tests the methods implemented in the ResizableArrayBag class from the BagInterface interface class.
+ *
+ * @group Wheat Farm
+ * @author Logan Bailey
+ * @author Janet Cho
+ * @author Kelly Tsai
+ */
 
-    testIsMax(bag2, false); 
-    String[] bag2Info = {"A", "A", "C", "D", "A"}; 
-    testAdd(bag2, bag2Info); 
+class ResizableArrayBagTest {
 
-    BagInterface<String> unions = bag1.union(bag2);
-    System.out.println("The union of this bag is: "); 
-    displayBag(unions); 
+	/*
+	 * The bag contains 5 items; [1, 2, 4, 5, 7]. Therefore, the current size should
+	 * equal 5.
+	 */
+	@Test
+	void testGetCurrentSize() {
+		// Arrange
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
 
-    BagInterface<String> intersections = bag1.intersection(bag2); 
-    System.out.println("The intersection of this bag is: ");
-    displayBag(intersections); 
+		bag.add(1);
+		bag.add(2);
+		bag.add(4);
+		bag.add(5);
+		bag.add(7);
 
-    BagInterface<String> differences = bag1.difference(bag2);
-    System.out.println("The difference of bag 1 minus bag 2 is: ");
-    displayBag(differences); 
+		int num = bag.getCurrentSize();
+		assertEquals(5, num);
+	}
 
+	/*
+	 * The bag contains 6 items; [1, 2, 4, 1, 5, 7]. Therefore, the current
+	 * frequency of 1 should be 2.
+	 */
+	@Test
+	void testGetFrequencyOf() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
+		bag.add(1);
+		bag.add(2);
+		bag.add(4);
+		bag.add(1);
+		bag.add(5);
+		bag.add(7);
 
-    testRemove(bag1, bag1Info);
-    
-    BagInterface<String> removed = bag1.union(bag2);
-    System.out.println("Removing the first bag will give us: ");
-    displayBag(removed); 
+		int num = bag.getFrequencyOf(1);
+		assertEquals(2, num);
+	}
 
-  
+	/*
+	 * The bag consists of [1, 2, 5]. After removing 2, the bag now only consists of
+	 * [1, 5].
+	 */
+	@Test
+	void testRemove() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
 
-    
+		bag.add(1);
+		bag.add(2);
+		bag.add(5);
 
-  }
+		bag.remove();
 
+		assertTrue(bag.contains(1));
+		assertTrue(bag.contains(2));
+		assertFalse(bag.contains(5));
+	}
 
+	/*
+	 * The bag consists of [1, 3, 5, 5]. After removing 5, the bag consists of [1,
+	 * 3, 5]. After removing 5 again, the bag consists of [1, 3].
+	 */
+	@Test
+	void testRemoveEntry() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
 
-  
-  private static void testAdd(BagInterface<String> aBag, String[] content) {
-    System.out.print("Adding to the bag: "); 
-    for (int index = 0; index < content.length; index++) {
-      aBag.add(content[index]); 
-      System.out.print(content[index] + " "); 
-    }//end for
-    System.out.println(); 
-    displayBag(aBag); 
-  }//end testAdd method
+		bag.add(1);
+		bag.add(3);
+		bag.add(5);
+		bag.add(5);
 
+		bag.remove(5);
+		assertTrue(bag.contains(5));
 
+		bag.remove(5);
+		assertFalse(bag.contains(5));
+		assertTrue(bag.contains(1));
+	}
 
-  private static void displayBag(BagInterface<String> aBag) {
-    System.out.println("The bag contains " + aBag.getCurrentSize() + " string(s), as follows: ");
-    Object[] bagArray = aBag.toArray(); 
-    for(int index = 0; index < bagArray.length; index++) {
-      System.out.print(bagArray[index] + " "); 
-    }//end for 
-    System.out.println(); 
-  }//end displayBag
+	/*
+	 * The bag consists of [1, 5, 7]. However, after clearing the bag, the bag
+	 * consists of 0 entries.
+	 */
+	@Test
+	void testClear() {
+		BagInterface<Integer> bag = new ResizableArrayBag<>();
 
-  private static void testRemove(BagInterface<String> aBag, String[] tests) {
-    for (int index = 0; index < tests.length; index++) {
-      String aString = tests[index]; 
-      if (aString.equals("") || (aString == null)) {
-        //Test remove()
-        System.out.println("\nRemoving a string from the bag: "); 
-        String removedString = aBag.remove(); 
-        System.out.println("remove() returns " + removedString); 
-      }
-      else {
-        //Test remove(aString) 
-        System.out.println("\nRemoving \"" + aString + "\" from the bag: ");
-        boolean result = aBag.remove(aString);
-        System.out.println("remove(\"" + aString + "\") returns " + result); 
-      }//end if 
-      displayBag(aBag); 
-    }//end for
-  }//end testRemove
+		bag.add(1);
+		bag.add(5);
+		bag.add(7);
 
-  //Tests the method isEmpty.
-  //correctResult indicates what isEmpty should return.
+		bag.clear();
 
+		assertFalse(bag.contains(1));
+		int num = bag.getCurrentSize();
+		assertEquals(0, num);
+	}
 
-  private static void testIsEmpty(BagInterface<String> aBag, boolean correctResult) {
-    System.out.print("Testing isEmpty with ");
-    if(correctResult) {
-      System.out.print("an empty bag:");
-    }
-    else {
-      System.out.print("a bag that is not empty:"); 
-    }
-    System.out.println("isEmpty finds the bag ");
-    if (correctResult && aBag.isEmpty()) {
-      System.out.println("empty: OK."); 
-    }
-    else if (correctResult) {
-      System.out.println("not empty, but it is empty: ERROR."); 
-    }
-    else if (!correctResult && aBag.isEmpty()) {
-      System.out.print("empty, but it is not empty: ERROR."); 
-    }
-    else {
-      System.out.println("not empty: OK."); 
-    }//end testIsEmpty
-  }
+	/*
+	 * Union is a collection of both bags. bag1: ["1", "2", "3"]. bag2:
+	 * ["4","hello"]. The union is ["1", "2", "3", "4", "hello"].
+	 */
+	@Test
+	void testUnion() {
+		// Arrange
+		BagInterface<String> bag1 = new ResizableArrayBag<>();
+		BagInterface<String> bag2 = new ResizableArrayBag<>();
 
-  private static void testIsMax(BagInterface<String> aBag, boolean correctResult) {
-    System.out.print("Testing isMax with ");
-    if(correctResult) {
-      System.out.print("a max bag:");
-    }
-    else {
-      System.out.print("a bag that is not max:"); 
-    }
-    System.out.println("isMax finds the bag ");
-    if (correctResult && aBag.isEmpty()) {
-      System.out.println("max: OK."); 
-    }
-    else if (correctResult) {
-      System.out.println("not max, but it is max: ERROR."); 
-    }
-    else if (!correctResult && aBag.isEmpty()) {
-      System.out.print("max, but it is not max: ERROR."); 
-    }
-    else {
-      System.out.println("not max: OK."); 
-    }//end testIsEmpty
-  }
+		bag1.add("1");
+		bag1.add("2");
+		bag1.add("3");
 
+		bag2.add("4");
+		bag2.add("hello");
 
-  
+		// Act
+		BagInterface<String> addition = bag1.union(bag2);
 
-  //Tests the method getFrequencyOf
-  private static void testFrequency(BagInterface<String> aBag, String[] tests) {
-    System.out.println("\nTesting the method getFrequencyOf:"); 
-    for (int index = 0; index < tests.length; index++) {
-      System.out.println("In this bag, the count of " + tests[index] + " is " +aBag.getFrequencyOf(tests[index])); 
-    } //end testFrequency
-  }
+		// Assert
+		assertTrue(addition.contains("2"));
+		assertFalse(addition.contains("bye"));
+		assertTrue(addition.contains("3"));
 
+	}
+
+	/*
+	 * Intersection is a collection of items found in both bags. bag1: [1, 2, 3]
+	 * bag2: [3, 4] The intersection is [3].
+	 */
+	@Test
+	void testIntersection() {
+		// Arrange
+		BagInterface<Integer> bag1 = new ResizableArrayBag<>();
+		BagInterface<Integer> bag2 = new ResizableArrayBag<>();
+
+		bag1.add(1);
+		bag1.add(2);
+		bag1.add(3);
+
+		bag2.add(3);
+		bag2.add(4);
+
+		// Act
+		BagInterface<Integer> intersect = bag1.intersection(bag2);
+
+		// Assert
+		assertTrue(intersect.contains(3));
+		assertFalse(intersect.contains(6));
+		assertFalse(intersect.contains(2));
+	}
+
+	/*
+	 * Difference is a collection of items that differ between bag 1 and bag 2.
+	 * bag1: [3, 6, 9] bag2: [6, 12, 18, 24] Difference: [3, 9]
+	 */
+	@Test
+	void testDifference() {
+		// Arrange
+		BagInterface<Integer> bag1 = new ResizableArrayBag<>();
+		BagInterface<Integer> bag2 = new ResizableArrayBag<>();
+
+		bag1.add(3);
+		bag1.add(6);
+		bag1.add(9);
+
+		bag2.add(6);
+		bag2.add(12);
+		bag2.add(18);
+		bag2.add(24);
+
+		// Act
+		BagInterface<Integer> differ = bag1.difference(bag2);
+
+		// Assert
+		assertTrue(differ.contains(3));
+		assertTrue(differ.contains(9));
+		assertFalse(differ.contains(18));
+	}
 }
