@@ -9,6 +9,7 @@ public class bagDriver {
 
 		Scanner s = new Scanner(System.in);
 		System.out.println("Welcome to the Wheat Farm.");
+		System.out.println("You will be demoing a bakery simulator using LinkedBag."); 
 		System.out.println("What kind of bread do you want in your first shopping cart?");
 		String item = s.nextLine();
 		bag1.add(item);
@@ -55,7 +56,7 @@ public class bagDriver {
 		System.out.println("--Checkout--");
 		System.out.print("Both carts have ");
 		System.out.print(Arrays.toString(bag1.union(bag2).toArray()));
-		System.out.println("in total.");
+		System.out.println(" in total.");
 
 		System.out.print("Both carts have ");
 		System.out.print(Arrays.toString(bag1.intersection(bag2).toArray()));
@@ -64,7 +65,76 @@ public class bagDriver {
 		System.out.print("The first cart has ");
 		System.out.print(Arrays.toString(bag1.difference(bag2).toArray()));
 		System.out.println(" in comparison to the second cart.");
-		s.close();
+
+		
+
+
+		BagInterface<String> bag3 = new ResizableArrayBag<>(); 
+		BagInterface<String> bag4 = new ResizableArrayBag<>(); 
+
+		System.out.println("You will be demoing a restaurant simulator using ResizableArrayBag."); 
+		System.out.println("What kind of drink would you like?"); 
+		
+		String drink = s.nextLine();  
+		drink = s.nextLine(); 
+		bag3.add(drink);
+		while(true) {
+			System.out.println("Would you like to add another drink? Type in 0 for Yes and 1 for no."); 
+			int input = s.nextInt(); 
+
+			if(input == 0) {
+				System.out.println("Please add your next drink."); 
+				drink = s.nextLine(); 
+				drink = s.nextLine(); 
+				bag3.add(drink); 
+			}
+			else if (input == 1) {
+				System.out.println("We will bring your drink shortly."); 
+				break;
+			}
+			else {
+				System.out.println("That is not a valid response."); 
+			}
+		}
+
+		System.out.println("What kind of food would you like to order?"); 
+		String food = s.nextLine(); 
+		food = s.nextLine(); 
+		bag4.add(food); 
+		while(true) {
+			System.out.println("Do you want to order any more food? Type in 0 for Yes and 1 for No."); 
+			int input = s.nextInt();
+
+			if(input == 0) {
+				System.out.println("Please add your next item.");
+				food = s.nextLine();
+				food = s.nextLine();
+				bag4.add(food); 
+			}
+			else if (input == 1) {
+				System.out.println("We will bring your food shortly.");
+				break;
+			}
+			else {
+				System.out.println("That is not a valid response."); 
+			}
+		}
+
+		System.out.println("The union of your entire order is: "); 
+		System.out.print(Arrays.toString(bag3.union(bag4).toArray()));
+
+		System.out.println("\nThe intersection of your entire order is: ");
+		System.out.print(Arrays.toString(bag3.intersection(bag4).toArray()));
+
+		System.out.println("\nThe difference of your entire order is: "); 
+		System.out.print(Arrays.toString(bag3.difference(bag4).toArray()));
+
+		s.close(); 
 
 	}
+
+	
+	
+
+
 }

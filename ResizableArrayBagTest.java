@@ -7,7 +7,6 @@ public class ResizableArrayBagTest
   { 
     //a bag who has a small initial capactiy
     BagInterface <String> bag1 = new ResizableArrayBag <>();
-    BagInterface <String> bag1 = null; 
     BagInterface <String> bag2 = new ResizableArrayBag <>();
     
 
@@ -38,7 +37,7 @@ public class ResizableArrayBagTest
     System.out.println("Removing the first bag will give us: ");
     displayBag(removed); 
 
-    testIsEmpty(bag1)
+  
 
     
 
