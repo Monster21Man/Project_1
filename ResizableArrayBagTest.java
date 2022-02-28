@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.*;
+import static org.junit.Assert.fail; 
 
 public class ResizableArrayBagTest
 {
@@ -7,7 +8,9 @@ public class ResizableArrayBagTest
   { 
     //a bag who has a small initial capactiy
     BagInterface <String> bag1 = new ResizableArrayBag <>();
+    BagInterface <String> bag1 = null; 
     BagInterface <String> bag2 = new ResizableArrayBag <>();
+    
 
     testIsMax(bag1, false); 
     String[] bag1Info = {"A", "B", "C", "A", "A", "A", "B", "A"};
@@ -36,7 +39,7 @@ public class ResizableArrayBagTest
     System.out.println("Removing the first bag will give us: ");
     displayBag(removed); 
 
-    // testIsEmpty(bag1)
+    testIsEmpty(bag1)
 
     
 

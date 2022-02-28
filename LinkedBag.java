@@ -239,6 +239,9 @@ public final class LinkedBag<T> implements BagInterface<T> {
 
 		}
 		return theBag;
+
 	}
+	
+
 
 } // end LinkedBag1

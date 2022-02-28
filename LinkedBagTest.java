@@ -7,7 +7,8 @@ public class LinkedBagTest
 	//Create two LinkedBag arrays with elements of type String
     BagInterface <String> bag1 = new LinkedBag <>();
     BagInterface <String> bag2 = new LinkedBag <>();
-    
+    BagInterface <String> bag3 = null; 
+    int numberofEntries; 
     //Add 4 entries to bag 1
     bag1.add("F");
     bag1.add("B");
@@ -76,6 +77,7 @@ public class LinkedBagTest
     System.out.println();
     
     //Test Case: Both bags are empty
+
     bag1.add("");
     bag1.add("");
     bag1.add("");
@@ -97,18 +99,18 @@ public class LinkedBagTest
     System.out.println();
     
   //Test Case: Both bags are empty
-    bag1.add("");
-    bag1.add("");
-    bag1.add("");
+   //  bag1.add("");
+   //  bag1.add("");
+   //  bag1.add("");
     
-    bag2.add(null);
-    bag2.add(null);
-    bag2.add(null);
+    bag2.add("");
+    bag2.add("");
+    bag2.add("");
     
     //Test our three methods on the two bags
-    System.out.println(Arrays.toString(bag1.union(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.intersection(bag2).toArray()));
-    System.out.println(Arrays.toString(bag1.difference(bag2).toArray()));
+    System.out.println(Arrays.toString(bag1.union(bag3).toArray()));
+    System.out.println(Arrays.toString(bag1.intersection(bag3).toArray()));
+    System.out.println(Arrays.toString(bag1.difference(bag3).toArray()));
     
     //Clear both bags of all entries
     bag1.clear();
